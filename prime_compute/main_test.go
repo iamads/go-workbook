@@ -21,7 +21,7 @@ func BenchmarkComputePrimeSingle(b *testing.B) {
 func BenchmarkComputePrimeWithGoroutines(b *testing.B) {
 
 	for _, n := range testArr {
-		b.Run(fmt.Sprintf("Using compute_prime_single to find primes till n=%d", n), func(b *testing.B) {
+		b.Run(fmt.Sprintf("Using compute_primes_with_goroutines to find primes till n=%d", n), func(b *testing.B) {
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
 				_ = computePrimesWithGoroutines(n)
@@ -32,7 +32,7 @@ func BenchmarkComputePrimeWithGoroutines(b *testing.B) {
 func BenchmarkComputePrimeWithGoroutinesBoundedConcurrency(b *testing.B) {
 
 	for _, n := range testArr {
-		b.Run(fmt.Sprintf("Using compute_prime_single to find primes till n=%d", n), func(b *testing.B) {
+		b.Run(fmt.Sprintf("Using compute_primes_with_goroutines_bounded_concurrency to find primes till n=%d", n), func(b *testing.B) {
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
 				_ = computePrimesWithGoroutinesBoundedConcurrency(n)
@@ -44,7 +44,7 @@ func BenchmarkComputePrimeWithGoroutinesBoundedConcurrency(b *testing.B) {
 func BenchmarkComputePrimeGoroutinesAtomic(b *testing.B) {
 
 	for _, n := range testArr {
-		b.Run(fmt.Sprintf("Using compute_prime_single to find primes till n=%d", n), func(b *testing.B) {
+		b.Run(fmt.Sprintf("Using compute_prime_goroutines_atomic to find primes till n=%d", n), func(b *testing.B) {
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
 				_ = computePrimeGoroutinesAtomic(n)
@@ -55,7 +55,7 @@ func BenchmarkComputePrimeGoroutinesAtomic(b *testing.B) {
 func BenchmarkComputePrimeGoroutinesAtomicBounded(b *testing.B) {
 
 	for _, n := range testArr {
-		b.Run(fmt.Sprintf("Using compute_prime_single to find primes till n=%d", n), func(b *testing.B) {
+		b.Run(fmt.Sprintf("Using compute_prime_goroutines_atomic_bounded to find primes till n=%d", n), func(b *testing.B) {
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
 				_ = computePrimeGoroutinesAtomicBounded(n)
@@ -67,7 +67,7 @@ func BenchmarkComputePrimeGoroutinesAtomicBounded(b *testing.B) {
 func BenchmarkComputePrimeChunked(b *testing.B) {
 
 	for _, n := range testArr {
-		b.Run(fmt.Sprintf("Using compute_prime_single to find primes till n=%d", n), func(b *testing.B) {
+		b.Run(fmt.Sprintf("Using compute_prime_chunked to find primes till n=%d", n), func(b *testing.B) {
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
 				_ = computePrimeChunked(n)
