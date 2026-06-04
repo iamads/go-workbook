@@ -64,13 +64,25 @@ func BenchmarkComputePrimeGoroutinesAtomicBounded(b *testing.B) {
 	}
 }
 
-func BenchmarkComputePrimeGoroutinesAtomicChunked(b *testing.B) {
+func BenchmarkComputePrimeChunked(b *testing.B) {
 
 	for _, n := range testArr {
 		b.Run(fmt.Sprintf("Using compute_prime_single to find primes till n=%d", n), func(b *testing.B) {
 			b.ResetTimer()
 			for i := 0; i < b.N; i++ {
-				_ = computePrimeChunkedAndAtomic(n)
+				_ = computePrimeChunked(n)
+			}
+		})
+	}
+}
+
+func BenchmarkComputePrimeChunkedAtomic(b *testing.B) {
+
+	for _, n := range testArr {
+		b.Run(fmt.Sprintf("Using compute_prime_chunked_atomic to find primes till n=%d", n), func(b *testing.B) {
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				_ = computePrimeChunkedAtomic(n)
 			}
 		})
 	}

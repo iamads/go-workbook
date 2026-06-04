@@ -38,10 +38,18 @@ func computePrimeGoroutinesAtomic(n int) []int {
 
 	for i <= n {
 		if apr.isPrimeArr[i].Load() && isReallyPrime(i) {
-			go markMultipleNotPrimeAtomic(apr, i)
+			apr.wg.Add(1)
+			go func(apr *PrimeRegistryAtomic, i int) {
+				defer func() {
+					apr.wg.Done()
+				}()
+				markMultipleNotPrimeAtomic(apr, i)
+			}(apr, i)
 		}
 		i++
 	}
+
+	apr.wg.Wait()
 
 	res := []int{}
 	for i, v := range apr.isPrimeArr {

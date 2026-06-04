@@ -2,13 +2,11 @@ package main
 
 import (
 	"runtime"
-	"sync"
 )
 
 func computePrimeGoroutinesAtomicBounded(n int) []int {
 	apr := NewAtomicPrimeRegistry(n)
 	ch := make(chan struct{}, runtime.NumCPU())
-	var wg sync.WaitGroup
 
 	for i := 0; i < len(apr.isPrimeArr); i++ {
 		if i == 0 || i == 1 {
@@ -23,11 +21,11 @@ func computePrimeGoroutinesAtomicBounded(n int) []int {
 	for i <= n {
 		if apr.isPrimeArr[i].Load() && isReallyPrime(i) {
 			ch <- struct{}{}
-			wg.Add(1)
+			apr.wg.Add(1)
 			go func(apr *PrimeRegistryAtomic, i int) {
 				defer func() {
 					<-ch
-					wg.Done()
+					apr.wg.Done()
 				}()
 				markMultipleNotPrimeAtomic(apr, i)
 			}(apr, i)
@@ -35,7 +33,7 @@ func computePrimeGoroutinesAtomicBounded(n int) []int {
 		i++
 	}
 
-	wg.Wait()
+	apr.wg.Wait()
 
 	res := []int{}
 	for i := 0; i < len(apr.isPrimeArr); i++ {

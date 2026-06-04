@@ -35,9 +35,23 @@ func TestChunkedImplementationMatchesReference(t *testing.T) {
 	for _, n := range tests {
 		t.Run("n="+strconv.Itoa(n), func(t *testing.T) {
 			want := computePrimeReference(n)
-			got := computePrimeChunkedAndAtomic(n)
+			got := computePrimeChunked(n)
 			if !reflect.DeepEqual(got, want) {
 				t.Fatalf("chunked implementation mismatch for n=%d:\nwant %v\ngot  %v", n, want, got)
+			}
+		})
+	}
+}
+
+func TestAtomicChunkedImplementationMatchesReference(t *testing.T) {
+	tests := []int{2, 3, 10, 20, 50, 100, 250, 500, 1000000}
+
+	for _, n := range tests {
+		t.Run("n="+strconv.Itoa(n), func(t *testing.T) {
+			want := computePrimeReference(n)
+			got := computePrimeChunkedAtomic(n)
+			if !reflect.DeepEqual(got, want) {
+				t.Fatalf("atomic chunked implementation mismatch for n=%d:\nwant %v\ngot  %v", n, want, got)
 			}
 		})
 	}
