@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package restaurant;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/iamads/go-workbook/restaurant_ordering_system/restaurant";
+
+service Restaurant {
+
+  rpc GetMenu(google.protobuf.Empty) returns (Menu) {}
+
+  rpc PlaceOrder(stream Order) returns (OrderSummary) {}
+
+  rpc KitchenSubscribe(google.protobuf.Empty) returns (stream Order) {}
+
+  rpc Review(stream ReviewChat) returns (stream ReviewChat) {}
+}
+
+
+message MenuItem {
+  string name = 1;
+  int32 price = 2;
+}
+
+message Menu {
+  repeated MenuItem items = 1;
+}
+
+message Order {
+  int32 id = 1;
+  repeated MenuItem orderItems = 2;
+}
+
+message OrderStatus {
+  int32 orderId = 1;
+  string status = 2;
+}
+
+message OrderSummary {
+  int32 orderId = 1;
+  repeated MenuItem orderItems = 2;
+}
+
+message ReviewChat {
+  string msg = 1;
+}
