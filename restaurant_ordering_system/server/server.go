@@ -14,6 +14,7 @@ import (
 
 var (
 	port = 50051
+	ch   = make(chan *pb.Order)
 )
 
 type restaurentServer struct {
@@ -70,7 +71,18 @@ func (s *restaurentServer) PlaceOrder(stream pb.Restaurant_PlaceOrderServer) err
 			s.orderMap[int(order.Id)] = []*pb.Order{order}
 		}
 		s.mu.Unlock()
+		ch <- order
 	}
+}
+
+func (s *restaurentServer) KitchenSubscribe(_ *emptypb.Empty, stream pb.Restaurant_KitchenSubscribeServer) error {
+	for order := range ch {
+		if err := stream.Send(order); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func newServer() *restaurentServer {
