@@ -121,7 +121,8 @@ func (x *Menu) GetItems() []*MenuItem {
 type Order struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	OrderItems    []*MenuItem            `protobuf:"bytes,2,rep,name=orderItems,proto3" json:"orderItems,omitempty"`
+	OrderItem     *MenuItem              `protobuf:"bytes,2,opt,name=orderItem,proto3" json:"orderItem,omitempty"`
+	Done          bool                   `protobuf:"varint,3,opt,name=done,proto3" json:"done,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -163,11 +164,18 @@ func (x *Order) GetId() int32 {
 	return 0
 }
 
-func (x *Order) GetOrderItems() []*MenuItem {
+func (x *Order) GetOrderItem() *MenuItem {
 	if x != nil {
-		return x.OrderItems
+		return x.OrderItem
 	}
 	return nil
+}
+
+func (x *Order) GetDone() bool {
+	if x != nil {
+		return x.Done
+	}
+	return false
 }
 
 type OrderStatus struct {
@@ -328,12 +336,11 @@ const file_restaurant_restaurant_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05price\x18\x02 \x01(\x05R\x05price\"2\n" +
 	"\x04Menu\x12*\n" +
-	"\x05items\x18\x01 \x03(\v2\x14.restaurant.MenuItemR\x05items\"M\n" +
+	"\x05items\x18\x01 \x03(\v2\x14.restaurant.MenuItemR\x05items\"_\n" +
 	"\x05Order\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x124\n" +
-	"\n" +
-	"orderItems\x18\x02 \x03(\v2\x14.restaurant.MenuItemR\n" +
-	"orderItems\"?\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x122\n" +
+	"\torderItem\x18\x02 \x01(\v2\x14.restaurant.MenuItemR\torderItem\x12\x12\n" +
+	"\x04done\x18\x03 \x01(\bR\x04done\"?\n" +
 	"\vOrderStatus\x12\x18\n" +
 	"\aorderId\x18\x01 \x01(\x05R\aorderId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\"^\n" +
@@ -377,7 +384,7 @@ var file_restaurant_restaurant_proto_goTypes = []any{
 }
 var file_restaurant_restaurant_proto_depIdxs = []int32{
 	0, // 0: restaurant.Menu.items:type_name -> restaurant.MenuItem
-	0, // 1: restaurant.Order.orderItems:type_name -> restaurant.MenuItem
+	0, // 1: restaurant.Order.orderItem:type_name -> restaurant.MenuItem
 	0, // 2: restaurant.OrderSummary.orderItems:type_name -> restaurant.MenuItem
 	6, // 3: restaurant.Restaurant.GetMenu:input_type -> google.protobuf.Empty
 	2, // 4: restaurant.Restaurant.PlaceOrder:input_type -> restaurant.Order

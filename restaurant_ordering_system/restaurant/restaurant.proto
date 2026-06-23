@@ -29,7 +29,8 @@ message Menu {
 
 message Order {
   int32 id = 1;
-  repeated MenuItem orderItems = 2;
+  MenuItem orderItem = 2;
+  bool done = 3;
 }
 
 message OrderStatus {
