@@ -60,7 +60,7 @@ func (s *restaurentServer) PlaceOrder(stream pb.Restaurant_PlaceOrderServer) err
 				OrderId:    order.Id,
 				OrderItems: orderItems,
 			}
-			return stream.SendMsg(&summary) // order is not there how will this happen
+			return stream.SendAndClose(&summary) // order is not there how will this happen
 		}
 
 		s.mu.Lock()
