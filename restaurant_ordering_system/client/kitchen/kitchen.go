@@ -6,7 +6,6 @@ import (
 	"log"
 
 	"google.golang.org/grpc"
-	// "google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/protobuf/types/known/emptypb"
 
@@ -37,7 +36,7 @@ func printOrders(client pb.RestaurantClient) {
 		if err != nil {
 			log.Fatalf("client.Kitchen subscribe failed while receiving: %v", err)
 		}
-		log.Printf("Order received %v", order)
+		log.Printf("New Order received: %s, for table %d", order.OrderItem.Name, order.TableNum)
 	}
 }
 
