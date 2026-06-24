@@ -120,7 +120,7 @@ func (x *Menu) GetItems() []*MenuItem {
 
 type Order struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TableNum      int32                  `protobuf:"varint,1,opt,name=tableNum,proto3" json:"tableNum,omitempty"`
 	OrderItem     *MenuItem              `protobuf:"bytes,2,opt,name=orderItem,proto3" json:"orderItem,omitempty"`
 	Done          bool                   `protobuf:"varint,3,opt,name=done,proto3" json:"done,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -157,9 +157,9 @@ func (*Order) Descriptor() ([]byte, []int) {
 	return file_restaurant_restaurant_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Order) GetId() int32 {
+func (x *Order) GetTableNum() int32 {
 	if x != nil {
-		return x.Id
+		return x.TableNum
 	}
 	return 0
 }
@@ -178,69 +178,18 @@ func (x *Order) GetDone() bool {
 	return false
 }
 
-type OrderStatus struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       int32                  `protobuf:"varint,1,opt,name=orderId,proto3" json:"orderId,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OrderStatus) Reset() {
-	*x = OrderStatus{}
-	mi := &file_restaurant_restaurant_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OrderStatus) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OrderStatus) ProtoMessage() {}
-
-func (x *OrderStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_restaurant_restaurant_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OrderStatus.ProtoReflect.Descriptor instead.
-func (*OrderStatus) Descriptor() ([]byte, []int) {
-	return file_restaurant_restaurant_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *OrderStatus) GetOrderId() int32 {
-	if x != nil {
-		return x.OrderId
-	}
-	return 0
-}
-
-func (x *OrderStatus) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
 type OrderSummary struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       int32                  `protobuf:"varint,1,opt,name=orderId,proto3" json:"orderId,omitempty"`
+	TableNum      int32                  `protobuf:"varint,1,opt,name=tableNum,proto3" json:"tableNum,omitempty"`
 	OrderItems    []*MenuItem            `protobuf:"bytes,2,rep,name=orderItems,proto3" json:"orderItems,omitempty"`
+	Total         int32                  `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OrderSummary) Reset() {
 	*x = OrderSummary{}
-	mi := &file_restaurant_restaurant_proto_msgTypes[4]
+	mi := &file_restaurant_restaurant_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -252,7 +201,7 @@ func (x *OrderSummary) String() string {
 func (*OrderSummary) ProtoMessage() {}
 
 func (x *OrderSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_restaurant_restaurant_proto_msgTypes[4]
+	mi := &file_restaurant_restaurant_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -265,12 +214,12 @@ func (x *OrderSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderSummary.ProtoReflect.Descriptor instead.
 func (*OrderSummary) Descriptor() ([]byte, []int) {
-	return file_restaurant_restaurant_proto_rawDescGZIP(), []int{4}
+	return file_restaurant_restaurant_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *OrderSummary) GetOrderId() int32 {
+func (x *OrderSummary) GetTableNum() int32 {
 	if x != nil {
-		return x.OrderId
+		return x.TableNum
 	}
 	return 0
 }
@@ -282,16 +231,24 @@ func (x *OrderSummary) GetOrderItems() []*MenuItem {
 	return nil
 }
 
+func (x *OrderSummary) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 type ReviewChat struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Msg           string                 `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+	TableNum      int32                  `protobuf:"varint,2,opt,name=tableNum,proto3" json:"tableNum,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ReviewChat) Reset() {
 	*x = ReviewChat{}
-	mi := &file_restaurant_restaurant_proto_msgTypes[5]
+	mi := &file_restaurant_restaurant_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -303,7 +260,7 @@ func (x *ReviewChat) String() string {
 func (*ReviewChat) ProtoMessage() {}
 
 func (x *ReviewChat) ProtoReflect() protoreflect.Message {
-	mi := &file_restaurant_restaurant_proto_msgTypes[5]
+	mi := &file_restaurant_restaurant_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -316,7 +273,7 @@ func (x *ReviewChat) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReviewChat.ProtoReflect.Descriptor instead.
 func (*ReviewChat) Descriptor() ([]byte, []int) {
-	return file_restaurant_restaurant_proto_rawDescGZIP(), []int{5}
+	return file_restaurant_restaurant_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ReviewChat) GetMsg() string {
@@ -324,6 +281,13 @@ func (x *ReviewChat) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+func (x *ReviewChat) GetTableNum() int32 {
+	if x != nil {
+		return x.TableNum
+	}
+	return 0
 }
 
 var File_restaurant_restaurant_proto protoreflect.FileDescriptor
@@ -336,22 +300,21 @@ const file_restaurant_restaurant_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05price\x18\x02 \x01(\x05R\x05price\"2\n" +
 	"\x04Menu\x12*\n" +
-	"\x05items\x18\x01 \x03(\v2\x14.restaurant.MenuItemR\x05items\"_\n" +
-	"\x05Order\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x122\n" +
+	"\x05items\x18\x01 \x03(\v2\x14.restaurant.MenuItemR\x05items\"k\n" +
+	"\x05Order\x12\x1a\n" +
+	"\btableNum\x18\x01 \x01(\x05R\btableNum\x122\n" +
 	"\torderItem\x18\x02 \x01(\v2\x14.restaurant.MenuItemR\torderItem\x12\x12\n" +
-	"\x04done\x18\x03 \x01(\bR\x04done\"?\n" +
-	"\vOrderStatus\x12\x18\n" +
-	"\aorderId\x18\x01 \x01(\x05R\aorderId\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\"^\n" +
-	"\fOrderSummary\x12\x18\n" +
-	"\aorderId\x18\x01 \x01(\x05R\aorderId\x124\n" +
+	"\x04done\x18\x03 \x01(\bR\x04done\"v\n" +
+	"\fOrderSummary\x12\x1a\n" +
+	"\btableNum\x18\x01 \x01(\x05R\btableNum\x124\n" +
 	"\n" +
 	"orderItems\x18\x02 \x03(\v2\x14.restaurant.MenuItemR\n" +
-	"orderItems\"\x1e\n" +
+	"orderItems\x12\x14\n" +
+	"\x05total\x18\x03 \x01(\x05R\x05total\":\n" +
 	"\n" +
 	"ReviewChat\x12\x10\n" +
-	"\x03msg\x18\x01 \x01(\tR\x03msg2\x85\x02\n" +
+	"\x03msg\x18\x01 \x01(\tR\x03msg\x12\x1a\n" +
+	"\btableNum\x18\x02 \x01(\x05R\btableNum2\x85\x02\n" +
 	"\n" +
 	"Restaurant\x125\n" +
 	"\aGetMenu\x12\x16.google.protobuf.Empty\x1a\x10.restaurant.Menu\"\x00\x12=\n" +
@@ -372,28 +335,27 @@ func file_restaurant_restaurant_proto_rawDescGZIP() []byte {
 	return file_restaurant_restaurant_proto_rawDescData
 }
 
-var file_restaurant_restaurant_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_restaurant_restaurant_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_restaurant_restaurant_proto_goTypes = []any{
 	(*MenuItem)(nil),      // 0: restaurant.MenuItem
 	(*Menu)(nil),          // 1: restaurant.Menu
 	(*Order)(nil),         // 2: restaurant.Order
-	(*OrderStatus)(nil),   // 3: restaurant.OrderStatus
-	(*OrderSummary)(nil),  // 4: restaurant.OrderSummary
-	(*ReviewChat)(nil),    // 5: restaurant.ReviewChat
-	(*emptypb.Empty)(nil), // 6: google.protobuf.Empty
+	(*OrderSummary)(nil),  // 3: restaurant.OrderSummary
+	(*ReviewChat)(nil),    // 4: restaurant.ReviewChat
+	(*emptypb.Empty)(nil), // 5: google.protobuf.Empty
 }
 var file_restaurant_restaurant_proto_depIdxs = []int32{
 	0, // 0: restaurant.Menu.items:type_name -> restaurant.MenuItem
 	0, // 1: restaurant.Order.orderItem:type_name -> restaurant.MenuItem
 	0, // 2: restaurant.OrderSummary.orderItems:type_name -> restaurant.MenuItem
-	6, // 3: restaurant.Restaurant.GetMenu:input_type -> google.protobuf.Empty
+	5, // 3: restaurant.Restaurant.GetMenu:input_type -> google.protobuf.Empty
 	2, // 4: restaurant.Restaurant.PlaceOrder:input_type -> restaurant.Order
-	6, // 5: restaurant.Restaurant.KitchenSubscribe:input_type -> google.protobuf.Empty
-	5, // 6: restaurant.Restaurant.Review:input_type -> restaurant.ReviewChat
+	5, // 5: restaurant.Restaurant.KitchenSubscribe:input_type -> google.protobuf.Empty
+	4, // 6: restaurant.Restaurant.Review:input_type -> restaurant.ReviewChat
 	1, // 7: restaurant.Restaurant.GetMenu:output_type -> restaurant.Menu
-	4, // 8: restaurant.Restaurant.PlaceOrder:output_type -> restaurant.OrderSummary
+	3, // 8: restaurant.Restaurant.PlaceOrder:output_type -> restaurant.OrderSummary
 	2, // 9: restaurant.Restaurant.KitchenSubscribe:output_type -> restaurant.Order
-	5, // 10: restaurant.Restaurant.Review:output_type -> restaurant.ReviewChat
+	4, // 10: restaurant.Restaurant.Review:output_type -> restaurant.ReviewChat
 	7, // [7:11] is the sub-list for method output_type
 	3, // [3:7] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -412,7 +374,7 @@ func file_restaurant_restaurant_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_restaurant_restaurant_proto_rawDesc), len(file_restaurant_restaurant_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

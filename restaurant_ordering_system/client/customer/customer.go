@@ -51,8 +51,6 @@ func customerOrder(client pb.RestaurantClient, menu *pb.Menu, tableNumber int) {
 	}
 	myOrders := pickRandomOrders(menu, tableNumber) // A helper method I have added to pick random order
 
-	myOrders = append(myOrders, &pb.Order{Done: true}) // we add this to mark we are finished ordering
-
 	for _, order := range myOrders {
 		if err := stream.Send(order); err != nil {
 			log.Fatalf("client.PlaceOrder failed at stream.send for order(%v) with error: %v", order, err)
@@ -63,8 +61,7 @@ func customerOrder(client pb.RestaurantClient, menu *pb.Menu, tableNumber int) {
 	if err != nil {
 		log.Fatalf("client.Place Order failed at stream close: %v", err)
 	}
-	log.Println(summary)
-	log.Printf("Total bill for Table %d is %d: %v\n", summary.TableNum, summary.Total)
+	log.Printf("Total bill for Table %d is %d \n", summary.TableNum, summary.Total)
 }
 
 // We use this function to review food

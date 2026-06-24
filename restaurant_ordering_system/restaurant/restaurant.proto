@@ -28,21 +28,18 @@ message Menu {
 }
 
 message Order {
-  int32 id = 1;
+  int32 tableNum = 1;
   MenuItem orderItem = 2;
   bool done = 3;
 }
 
-message OrderStatus {
-  int32 orderId = 1;
-  string status = 2;
-}
-
 message OrderSummary {
-  int32 orderId = 1;
+  int32 tableNum = 1;
   repeated MenuItem orderItems = 2;
+  int32 total = 3;
 }
 
 message ReviewChat {
   string msg = 1;
+  int32 tableNum = 2;
 }
